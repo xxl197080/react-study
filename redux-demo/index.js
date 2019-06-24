@@ -1,8 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TodoApp from './components/TodoApp'
+import {Hello, World} from './App'
+
 
 ReactDOM.render(
-  <TodoApp />,
+  <div>
+    <Hello />
+    <hr/>
+    <World />
+  </div>,
   document.getElementById('root')
 )
