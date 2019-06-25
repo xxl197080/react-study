@@ -8,14 +8,13 @@ class TodoApp extends React.Component {
   constructor  (props) {
     super(props)
     this.state = {
-      inputVal: store.getState().inputVal,
-      todoList: store.getState().todoList
+      inputVal: store.getState().todo.inputVal,
+      todoList: store.getState().todo.todoList
     }
     store.subscribe(() => {
-      console.log('数据改变了')
       this.setState({
-        inputVal: store.getState().inputVal,
-        todoList: store.getState().todoList
+        inputVal: store.getState().todo.inputVal,
+        todoList: store.getState().todo.todoList
       })
     })
   }

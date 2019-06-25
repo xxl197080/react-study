@@ -7,17 +7,18 @@ class CarApp extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      productList: store.getState().productList,
-      carList: store.getState().carList
+      productList: store.getState().car.productList,
+      carList: store.getState().car.carList
     }
     store.subscribe(() => {
       this.setState({
-        productList: store.getState().productList,
-        carList: store.getState().carList
+        productList: store.getState().car.productList,
+        carList: store.getState().car.carList
       })
     })
   }
   render () {
+    console.log(store.getState())
     return (
       <div className="box">
         <ul className="left">
