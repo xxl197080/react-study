@@ -1,4 +1,4 @@
-import {INPUTVAL, ADDTODO} from '../actionTypes'
+import {INPUTVAL, ADDTODO, DELTODO} from '../actionTypes'
 
 const initState = {
   inputVal: '',
@@ -15,6 +15,10 @@ export default (state = initState, action) => {
     case ADDTODO:
       newState.todoList.push(state.inputVal)
       return newState
+    case DELTODO:
+      newState.todoList.splice(action.index, 1)
+      return newState
+
     default:
       return newState;
   }

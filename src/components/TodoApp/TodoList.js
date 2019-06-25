@@ -7,7 +7,7 @@ class TodoList extends React.Component {
         {
           this.props.todoList.map((item, index) => {
             return (
-              <li key={index}>{ item }</li>
+              <li key={index}>{ item } - <button onClick={this.props.delTodo.bind(null, index)}>Del</button></li>
             )
           })
         }

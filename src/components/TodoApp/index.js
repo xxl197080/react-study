@@ -2,7 +2,7 @@ import React from 'react'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 import store from '../../store'
-import { setInputVal, addTodo } from '../../store/actionCreat'
+import { setInputVal, addTodo, delTodo } from '../../store/actionCreat'
 
 class TodoApp extends React.Component {
   constructor  (props) {
@@ -22,7 +22,7 @@ class TodoApp extends React.Component {
     return (
       <div>
         <TodoInput inputVal={this.state.inputVal} changeInput={this.changeInput} addTodo={this.addTodo} />
-        <TodoList todoList={this.state.todoList} />
+        <TodoList todoList={this.state.todoList} delTodo={this.delTodo} />
       </div>
     )
   }
@@ -33,6 +33,9 @@ class TodoApp extends React.Component {
   }
   addTodo () {
     store.dispatch(addTodo())
+  }
+  delTodo (index) {
+    store.dispatch(delTodo(index))
   }
 }
 
