@@ -1,9 +1,13 @@
-// 仓库的主文件
-// 1、引入 redux
-import { createStore } from 'redux'
-// 2、引入 reducer 文件
-import reducer from './reducer'
-// 3、创建 store 实例对象,并把reducer文件当参数传进去
-const store = createStore(reducer);
-// 4、把 store 暴露出去
+import { createStore, combineReducers } from 'redux';
+import todoReducer from '../TodoApp/store/reducer'
+
+const reducers = combineReducers({
+  todo: todoReducer
+})
+
+const store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 export default store;
+

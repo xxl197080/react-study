@@ -1,22 +1,30 @@
+import {combineReducers} from 'redux'
+
 import TodoApp from './TodoApp'
 import CarApp from './CarApp'
 
-const initState = {
-  // inputVal: '',
-  // todoList: [],
-  // productList:[
-  //   { id: 1, name: 'apple', price: 5 },
-  //   { id: 2, name: 'banana', price: 12 },
-  //   { id: 3, name: 'orange', price: 8 }
-  // ], // 商品数据
-  // carList: [] // 购物车商品数据
-}
+export default combineReducers({
+  todo: TodoApp,
+  car: CarApp
+})
 
-export default (state = initState, action) => {
-  return {
-    todo: TodoApp(state.todo, action),
-    car: CarApp(state.car, action)
-  }
+// const initState = {
+//   // inputVal: '',
+//   // todoList: [],
+//   // productList:[
+//   //   { id: 1, name: 'apple', price: 5 },
+//   //   { id: 2, name: 'banana', price: 12 },
+//   //   { id: 3, name: 'orange', price: 8 }
+//   // ], // 商品数据
+//   // carList: [] // 购物车商品数据
+// }
+
+// export default (state = initState, action) => {
+//   return {
+//     todo: TodoApp(state.todo, action),
+//     car: CarApp(state.car, action)
+//   }
+
   // switch (action.type) {
   //   case INPUTVAL:
   //   return Object.assign({}, state, { inputVal: action.value })
@@ -73,4 +81,4 @@ export default (state = initState, action) => {
   //   default:
   //     return state;
   // }
-}
+// }
