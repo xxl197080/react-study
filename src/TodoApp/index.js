@@ -1,50 +1,41 @@
-import React, { Component } from 'react'
-import { Input, Button, List } from 'antd';
-import {TodoListWarp, TodoInputWarp } from './style'
-import store from '@/store'
-import { getTodoList } from './store/actionCreates'
+// 容器组件
+// 1、引入 react-redux 中的 connect
+import { connect } from 'react-redux'
+import TodoListUI from './ui'
+import { addTodo, changeInput, getInitTodoList } from './store/actionCreates'
 
-export default class TodoApp extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      inputVal: store.getState().todo.inputVal,
-      todoList: store.getState().todo.todoList
-    }
-    store.subscribe(() => {
-      this.setState({
-        inputVal: store.getState().todo.inputVal,
-        todoList: store.getState().todo.todoList
-      })
-    })
-  }
-  render() {
-    // console.log(this.state.todoList)
-    return (
-      <TodoListWarp>
-        <TodoInputWarp>
-          <Input placeholder="请输入内容" />
-          <Button type="danger">ADD</Button>
-        </TodoInputWarp>
-        <List dataSource={this.state.todoList}
-          locale={{emptyText: '暂无数据'}}
-          renderItem={item => {
-            return (
-              <List.Item key={item.id}>
-                {item.name}
-              </List.Item>
-            )
-          }}
-          />
-      </TodoListWarp>
-    )
-  }
-  componentDidMount () {
-    fetch('http://localhost:3001/todos')
-      .then(response => response.json())
-      .then(res => {
-        // console.log(res)
-        store.dispatch(getTodoList(res))
-      })
+// 2、定义两个方法
+/**
+ * 2.1 mapStateToProps  从仓库中的 state 中获取数据，并作为 UI 组件的 props 传递下去
+ * @param {Object} state 就是仓库中 state 的数据
+ */
+const mapStateToProps = (state) => {
+  // console.log(state)
+  let {todo} = state
+  return {
+    todoList: todo.todoList,
+    inputVal: todo.inputVal
   }
 }
+
+/**
+ * 2.2 mapDispatchToProps 将一些方法传递给 UI组件
+ * @param {Function} dispatch 就是 store.dispatch
+ */
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick () {
+      dispatch(addTodo())
+    },
+    onInputChg (event) {
+      let value = event.target.value
+      dispatch(changeInput(value))
+    },
+    getInitTodoList () {
+      dispatch(getInitTodoList())
+    }
+  }
+}
+
+// 3、调用 connect 方法生成容器组件，并暴露出去
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListUI)
